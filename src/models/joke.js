@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 
+// Define the vote schema
+const voteSchema = new mongoose.Schema({
+    value: { type: Number, required: true },
+    label: { type: String, required: true, enum: ["😊", "🤣", "❤️"], }
+  });
+
 const jokeSchema = new mongoose.Schema({
     id: {
         type: String,
@@ -10,12 +16,8 @@ const jokeSchema = new mongoose.Schema({
     answer: {
         type: String,
     },
-    votes: {
-        type: String,
-    },
-    availableVotes: {
-        type: String,
-    }
+    votes: [voteSchema],
+    availableVotes: ["😊", "🤣", "❤️"]
 });
 
 const Joke = mongoose.model("Joke", jokeSchema);
